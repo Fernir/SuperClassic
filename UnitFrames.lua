@@ -31,6 +31,7 @@ module.Init = function()
         end
     end)
     
+    local cc = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[select(2, UnitClass("player"))] or RAID_CLASS_COLORS[select(2, UnitClass("player"))] or  { r=.5, g=.5, b=.5 }
 
     for i,v in pairs({
         MainMenuBarTexture0,
@@ -51,7 +52,11 @@ module.Init = function()
         MinimapBorder,
         select(1, TimeManagerClockButton:GetRegions()),
     }) do
-        v:SetVertexColor(.5,.5,.5)
+        if SCDB["Main"].ClassColored == true then
+            v:SetVertexColor(cc.r, cc.g, cc.b)
+        else
+            v:SetVertexColor(.5,.5,.5)
+        end
     end
     
     local allframes = {

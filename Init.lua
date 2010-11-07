@@ -10,7 +10,8 @@ DefaultSettings = {
 	["Main"] = {
 		["Set WatchFrame movable"] = true,
 		["UIScale"] = false,
-		["Font"] = media.."font.ttf",               -- global font
+		["Font"] = media.."font.ttf",
+		["ClassColored"] = false,
 	},
 }
 
@@ -267,13 +268,11 @@ local LaunchMain = function(settings)
 		local wfh = _G["WatchFrameHeader"]
 		if wf then
 			wf:SetMovable(true)
-			wf:SetUserPlaced(true)
 			wfh:EnableMouse(true)
 			wfh:RegisterForDrag("LeftButton")
 			
 			wfh:SetBackdrop({ bgFile = "Interface\\Tooltips\\UI-Tooltip-Background", })
 			wfh:SetBackdropColor(0,0,0,.2)
-			wf:ClearAllPoints()
 			
 			wfh:SetScript("OnDragStart", function(self) wf:StartMoving() end)
 			wfh:SetScript("OnDragStop", function(self) wf:StopMovingOrSizing() end)

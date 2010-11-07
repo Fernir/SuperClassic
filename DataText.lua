@@ -340,6 +340,7 @@ module.Init = function()
     
     if SCDB[module.name] == nil then SCDB[module.name] = {} end
     
+    if SCDB[module.name]["AutoHide"] == nil then SCDB[module.name]["AutoHide"] = true end
     if SCDB[module.name]["Gold"] == nil then SCDB[module.name]["Gold"] = true end
     if SCDB[module.name]["Durability"] == nil then SCDB[module.name]["Durability"] = true end
     if SCDB[module.name]["Latency"] == nil then SCDB[module.name]["Latency"] = true end
@@ -359,7 +360,6 @@ module.Init = function()
     aFrame:SetHeight(15)
     aFrame:SetWidth(UIParent:GetWidth())
     aFrame:SetPoint("TOP")
-    aFrame:SetAlpha(0)
         
     
     local set_anim = function (self, x, y)
@@ -384,17 +384,20 @@ module.Init = function()
         end)
     end
 
-    set_anim(aFrame, 0, 14)
+    if SCDB[module.name]["AutoHide"] == true then
+        aFrame:SetAlpha(0)
+        set_anim(aFrame, 0, 14)
 
-    aFrame:SetScript("OnEnter",function(self)
-        aFrame.anim:Play()
-        aFrame.anim_o:Stop()
-    end)
+        aFrame:SetScript("OnEnter",function(self)
+            aFrame.anim:Play()
+            aFrame.anim_o:Stop()
+        end)
 
-    aFrame:SetScript("OnLeave",function(self)
-        aFrame.anim:Stop()
-        aFrame.anim_o:Play()
-    end)
+        aFrame:SetScript("OnLeave",function(self)
+            aFrame.anim:Stop()
+            aFrame.anim_o:Play()
+        end)
+    end
     
     cString("Menu", openMicroMenu, "border")
 
